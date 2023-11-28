@@ -6,9 +6,6 @@ const {Triangle, Square, Circle} = require("./lib/shapes");
 
 
 
-
-
-
 function promptUser() {
     inquirer.prompt([
         {
@@ -54,7 +51,7 @@ function writeToFile(fileName, answers) {
  let logoString = "";
 
  logoString = 
- '<svg version="1.1" width="300" height="200" xmlns="http://w3.org/2000/svg">';
+ '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">';
 
  logoString += "<g>";
 
@@ -64,13 +61,23 @@ function writeToFile(fileName, answers) {
  let shapeChoice;
  if (answers.shape === "Triangle"){
     shapeChoice = new Triangle();
+    logoString += `<polygon points="150, 18 244, 182 56, 182" fill="${answers.shapeColor}"/>`
  } else if (answers.shape === "Square") {
     shapeChoice = new Square();
+    logoString += `<rect x="73" y="40" width="160" height="160" fill="${answers.shapeColor}"/>`
  } else {
     shapeChoice = new Circle();
+    logoString += `<circle cx="150" cy="115" r="80" fill="${answers.shapeColor}"/>`;
  }
 
-    fs.writeFile(fileName, svgString, (err) => {
+// <text> tag gives rise to text alignment, text-content/text-color taken in from user prompt and gives default font size of "40"
+logoString += `<text x="150" y="130" text-anchor="middle" font-size="40" fill="${answers.textColor}">${answers.text}</text>`;
+// Closing </g> tag
+logoString += "</g>";
+// Closing </svg> tag
+logoString += "</svg>";
+
+    fs.writeFile(fileName, logoString, (err) => {
         err ? console.log(err) : console.log("generated logo.svg");
     })
 }
