@@ -78,10 +78,8 @@ logoString += "</g>";
 logoString += "</svg>";
 
     fs.writeFile(fileName, logoString, (err) => {
-        err ? console.log(err) : console.log("generated logo.svg");
+        err ? console.log(err) : console.log("Logo has been generated!");
     })
 }
-
-
 
 promptUser();
