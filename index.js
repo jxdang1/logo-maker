@@ -42,7 +42,7 @@ function promptUser() {
             console.log("Please enter a value of no more than 3 characters");
             promptUser();
         } else {
-            writeToFile("logo.svg", answers);
+            writeToFile("./example/logo.svg", answers);
         }
     });
 }
